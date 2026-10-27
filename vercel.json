@@ -1,8 +1,5 @@
 {
-  "cleanUrls": true,
-  "routes": [
-    { "src": "/ads.txt", "dest": "/ads.txt" },
-    { "src": "/robots.txt", "dest": "/robots.txt" },
-    { "src": "/(.*)", "dest": "/$1" }
-  ]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": null,
+  "outputDirectory": "."
 }
