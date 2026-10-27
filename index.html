@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdSpot - Discover Offers and Services</title>
+    <meta name="description"
+        content="AdSpot is a simple place to discover offers, products and services from advertisers, served by Google Ads.">
+
+    <!-- 1. Replace ca-pub-XXXXXXXXXXXXXXXX with YOUR AdSense publisher ID (everywhere in this file) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+        crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --gap: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: var(--gap);
+            background: #f1f3f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .site-header {
+            max-width: 1200px;
+            margin: 0 auto var(--gap);
+            text-align: center;
+            padding: 24px 8px 8px;
+        }
+
+        .site-header h1 {
+            margin: 0 0 8px;
+            font-size: 2rem;
+            color: #202124;
+        }
+
+        .site-header p {
+            margin: 0 auto;
+            max-width: 640px;
+            color: #5f6368;
+            line-height: 1.5;
+        }
+
+        .grid {
+            display: grid;
+            gap: var(--gap);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slot {
+            background: #fff;
+            border: 1px dashed #c8c8c8;
+            /* visible only until an ad fills the slot */
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .slot.wide {
+            grid-column: 1 / -1;
+            min-height: 120px;
+        }
+
+        ins.adsbygoogle {
+            display: block;
+            width: 100%;
+        }
+
+        /* hide the dashed placeholder border once Google fills the slot */
+        .slot:has(ins[data-ad-status="filled"]) {
+            border: 0;
+        }
+
+        .slot:has(ins[data-ad-status="unfilled"]) {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <h1>AdSpot</h1>
+        <p>Your simple place to discover offers, products and services from advertisers across the web. All listings on
+            this page are served by Google Ads.</p>
+    </header>
+
+    <div class="grid">
+
+        <!-- Wide banner -->
+        <div class="slot wide">
+            <!-- 2. Replace data-ad-slot with the ad unit ID from your AdSense account -->
+            <ins class="adsbygoogle" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111"
+                data-ad-format="auto" data-full-width-responsive="true"></ins>
+        </div>
+
+        <div class="slot">
+            <ins class="adsbygoogle" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222"
+                data-ad-format="auto" data-full-width-responsive="true"></ins>
+        </div>
+
+        <div class="slot">
+            <ins class="adsbygoogle" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333"
+                data-ad-format="auto" data-full-width-responsive="true"></ins>
+        </div>
+
+        <div class="slot">
+            <ins class="adsbygoogle" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="4444444444"
+                data-ad-format="auto" data-full-width-responsive="true"></ins>
+        </div>
+
+        <!-- Wide banner -->
+        <div class="slot wide">
+            <ins class="adsbygoogle" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="5555555555"
+                data-ad-format="auto" data-full-width-responsive="true"></ins>
+        </div>
+
+    </div>
+
+    <script>
+        // Request an ad for every slot on the page
+        document.querySelectorAll("ins.adsbygoogle").forEach(function () {
+            try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) { }
+        });
+    </script>
+</body>
+
+</html>
