@@ -10,66 +10,278 @@
 
     <meta name="google-adsense-account" content="ca-pub-8035228866562503">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8035228866562503"
         crossorigin="anonymous"></script>
 
     <style>
+        /* ============================================================
+           THEME VARIABLES: matching 404.html neo-brutalist design
+           ============================================================ */
         :root {
-            --gap: 16px;
+            --bg: #fff4d6;
+            --ink: #111111;
+            --paper: #ffffff;
+            --accent: #ffd400;
+            --accent-2: #ff5c8a;
+            --accent-3: #3ddc97;
+            --border: 4px solid var(--ink);
+            --shadow: 8px 8px 0 var(--ink);
+            --card-shadow: 6px 6px 0 var(--ink);
+            --btn-shadow: 5px 5px 0 var(--ink);
+            --btn-hover-shadow: 3px 3px 0 var(--ink);
+            --font: "Space Grotesk", "Segoe UI", system-ui, Arial, sans-serif;
+            --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+            --gap: 20px;
+        }
+
+        /* Dark mode theme */
+        [data-theme="dark"] {
+            --bg: #141419;
+            --ink: #f0f0f5;
+            --paper: #22222b;
+            --accent: #ffd400;
+            --accent-2: #ff5c8a;
+            --accent-3: #3ddc97;
+            --border: 4px solid #f0f0f5;
+            --shadow: 8px 8px 0 #000000;
+            --card-shadow: 6px 6px 0 #000000;
+            --btn-shadow: 5px 5px 0 #000000;
+            --btn-hover-shadow: 3px 3px 0 #000000;
         }
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            padding: var(--gap);
-            background: #f1f3f4;
-            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            padding: 24px 16px 40px;
+            font-family: var(--font);
+            color: var(--ink);
+            background-color: var(--bg);
+            background-image: radial-gradient(var(--ink) 1.2px, transparent 1.2px);
+            background-size: 22px 22px;
+            transition: background-color .2s ease, color .2s ease;
         }
 
-        .site-header {
+        .container {
             max-width: 1200px;
-            margin: 0 auto var(--gap);
-            text-align: center;
-            padding: 24px 8px 8px;
-        }
-
-        .site-header h1 {
-            margin: 0 0 8px;
-            font-size: 2rem;
-            color: #202124;
-        }
-
-        .site-header p {
             margin: 0 auto;
-            max-width: 640px;
-            color: #5f6368;
-            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap);
         }
 
+        /* Neo-brutalist Card */
+        .card {
+            background: var(--paper);
+            border: var(--border);
+            box-shadow: var(--shadow);
+            transition: background .2s ease, border-color .2s ease;
+        }
+
+        /* Window Header Bar */
+        .bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            background: var(--accent);
+            border-bottom: var(--border);
+            font-family: var(--mono);
+            font-size: .85rem;
+            font-weight: 700;
+            color: #111111;
+        }
+
+        .dots {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border: 3px solid #111111;
+            border-radius: 50%;
+            background: #ffffff;
+        }
+
+        .dot:nth-child(2) {
+            background: var(--accent-2);
+        }
+
+        .dot:nth-child(3) {
+            background: var(--accent-3);
+        }
+
+        .dot.sm {
+            width: 10px;
+            height: 10px;
+            border-width: 2px;
+        }
+
+        .bar-title {
+            margin-left: 6px;
+        }
+
+        /* Theme Switcher Button */
+        .theme-toggle {
+            margin-left: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            font-family: var(--mono);
+            font-size: .75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #111111;
+            background: #ffffff;
+            border: 2px solid #111111;
+            box-shadow: 2px 2px 0 #111111;
+            cursor: pointer;
+            transition: transform .1s, box-shadow .1s;
+        }
+
+        .theme-toggle:hover {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0 #111111;
+        }
+
+        .theme-toggle:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0 0 0 #111111;
+        }
+
+        /* Hero / Header Card */
+        .header-body {
+            padding: 36px 32px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .header-top {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-title {
+            font-size: clamp(2.6rem, 7vw, 4.2rem);
+            font-weight: 900;
+            line-height: .95;
+            letter-spacing: -2px;
+            -webkit-text-stroke: 3px var(--ink);
+            color: var(--accent-2);
+            text-shadow: 5px 5px 0 var(--ink);
+            transform: rotate(-1deg);
+            display: inline-block;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            font-family: var(--mono);
+            font-size: .8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: var(--accent-3);
+            color: #111111;
+            border: 2px solid var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+        }
+
+        .tagline {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            font-weight: 500;
+            max-width: 800px;
+        }
+
+        .meta-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 6px;
+            padding-top: 18px;
+            border-top: 3px dashed var(--ink);
+            font-family: var(--mono);
+            font-size: .85rem;
+            font-weight: 700;
+        }
+
+        .meta-tag {
+            padding: 5px 12px;
+            background: var(--paper);
+            border: 2px solid var(--ink);
+            box-shadow: 2px 2px 0 var(--ink);
+        }
+
+        .meta-tag.highlight {
+            background: var(--accent);
+            color: #111111;
+        }
+
+        /* Ad Grid */
         .grid {
             display: grid;
             gap: var(--gap);
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            max-width: 1200px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         }
 
+        /* Ad Slot Cards */
         .slot {
-            background: #fff;
-            border: 1px dashed #c8c8c8;
-            /* visible only until an ad fills the slot */
-            min-height: 280px;
+            background: var(--paper);
+            border: var(--border);
+            box-shadow: var(--card-shadow);
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
             overflow: hidden;
+            transition: transform .15s ease, box-shadow .15s ease;
         }
 
         .slot.wide {
             grid-column: 1 / -1;
+        }
+
+        .slot-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--bg);
+            border-bottom: 2px solid var(--ink);
+            font-family: var(--mono);
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: .5px;
+            color: var(--ink);
+            text-transform: uppercase;
+        }
+
+        .slot-bar span {
+            margin-left: 4px;
+        }
+
+        .slot-content {
+            padding: 16px;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--paper);
+        }
+
+        .slot.wide .slot-content {
             min-height: 120px;
         }
 
@@ -78,63 +290,231 @@
             width: 100%;
         }
 
-        /* hide the dashed placeholder border once Google fills the slot */
-        .slot:has(ins[data-ad-status="filled"]) {
-            border: 0;
-        }
-
+        /* Hide slot container completely if AdSense explicitly reports unfilled */
         .slot:has(ins[data-ad-status="unfilled"]) {
             display: none;
+        }
+
+        /* Footer Card */
+        .footer-card {
+            background: var(--paper);
+            border: var(--border);
+            box-shadow: var(--card-shadow);
+            padding: 24px 32px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            font-family: var(--mono);
+            font-size: .85rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            padding: 6px 14px;
+            font-weight: 800;
+            color: #111111;
+            text-decoration: none;
+            background: var(--accent-3);
+            border: 2px solid var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+            transition: transform .1s, box-shadow .1s;
+        }
+
+        .footer-links a:hover {
+            background: var(--accent);
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0 var(--ink);
+        }
+
+        .footer-links a:nth-child(even) {
+            background: var(--accent-2);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 16px 12px 32px;
+            }
+
+            .header-body {
+                padding: 24px 20px;
+            }
+
+            .footer-card {
+                padding: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            :root {
+                --shadow: 5px 5px 0 var(--ink);
+                --card-shadow: 4px 4px 0 var(--ink);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+            }
         }
     </style>
 </head>
 
 <body>
 
+    <div class="container">
 
-    <header class="site-header">
-        <h1>AdSpot</h1>
-        <p>Your simple place to discover offers, products and services from advertisers across the web. All listings on
-            this page are served by Google Ads.</p>
-    </header>
+        <!-- Main Header Card -->
+        <header class="card">
+            <div class="bar" aria-label="Header bar">
+                <div class="dots" aria-hidden="true">
+                    <i class="dot"></i><i class="dot"></i><i class="dot"></i>
+                </div>
+                <span class="bar-title">AdSpot // network.hub</span>
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+                    <span id="themeLabel">Dark 🌙</span>
+                </button>
+            </div>
 
-    <div class="grid">
+            <div class="header-body">
+                <div class="header-top">
+                    <h1 class="brand-title">AdSpot</h1>
+                    <span class="badge">Google Ads Partner</span>
+                </div>
 
-        <!-- Wide banner -->
-        <div class="slot wide">
-            <!-- 2. Replace data-ad-slot with the ad unit ID from your AdSense account -->
-            <ins class="adsbygoogle" data-ad-client="ca-pub-8035228866562503" data-ad-slot="1111111111"
-                data-ad-format="auto" data-full-width-responsive="true"></ins>
-        </div>
+                <p class="tagline">
+                    Your simple place to discover offers, products and services from advertisers across the web. All
+                    listings on this page are served by Google Ads.
+                </p>
 
-        <div class="slot">
-            <ins class="adsbygoogle" data-ad-client="ca-pub-8035228866562503" data-ad-slot="2222222222"
-                data-ad-format="auto" data-full-width-responsive="true"></ins>
-        </div>
+                <div class="meta-strip">
+                    <span class="meta-tag highlight">⚡ Live Verified Ads</span>
+                    <span class="meta-tag">Publisher ID: ca-pub-8035228866562503</span>
+                    <span class="meta-tag">Status: Active</span>
+                </div>
+            </div>
+        </header>
 
-        <div class="slot">
-            <ins class="adsbygoogle" data-ad-client="ca-pub-8035228866562503" data-ad-slot="3333333333"
-                data-ad-format="auto" data-full-width-responsive="true"></ins>
-        </div>
+        <!-- Ad Grid Showcase -->
+        <main class="grid" aria-label="Advertisements Showcase">
 
-        <div class="slot">
-            <ins class="adsbygoogle" data-ad-client="ca-pub-8035228866562503" data-ad-slot="4444444444"
-                data-ad-format="auto" data-full-width-responsive="true"></ins>
-        </div>
+            <!-- Wide banner Top -->
+            <div class="slot wide">
+                <div class="slot-bar">
+                    <i class="dot sm"></i><i class="dot sm"></i><i class="dot sm"></i>
+                    <span>Advertisement &bull; Header Banner</span>
+                </div>
+                <div class="slot-content">
+                    <ins class="adsbygoogle" data-ad-client="ca-pub-8035228866562503" data-ad-slot="1111111111"
+                        data-ad-format="auto" data-full-width-responsive="true"></ins>
+                </div>
+            </div>
 
-        <!-- Wide banner -->
-        <div class="slot wide">
-            <ins class="adsbygoogle" data-ad-client="ca-pub-8035228866562503" data-ad-slot="5555555555"
-                data-ad-format="auto" data-full-width-responsive="true"></ins>
-        </div>
+            <!-- Ad Unit 1 -->
+            <div class="slot">
+                <div class="slot-bar">
+                    <i class="dot sm"></i><i class="dot sm"></i><i class="dot sm"></i>
+                    <span>Advertisement &bull; Unit 01</span>
+                </div>
+                <div class="slot-content">
+                    <ins class="adsbygoogle" data-ad-client="ca-pub-8035228866562503" data-ad-slot="2222222222"
+                        data-ad-format="auto" data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+
+            <!-- Ad Unit 2 -->
+            <div class="slot">
+                <div class="slot-bar">
+                    <i class="dot sm"></i><i class="dot sm"></i><i class="dot sm"></i>
+                    <span>Advertisement &bull; Unit 02</span>
+                </div>
+                <div class="slot-content">
+                    <ins class="adsbygoogle" data-ad-client="ca-pub-8035228866562503" data-ad-slot="3333333333"
+                        data-ad-format="auto" data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+
+            <!-- Ad Unit 3 -->
+            <div class="slot">
+                <div class="slot-bar">
+                    <i class="dot sm"></i><i class="dot sm"></i><i class="dot sm"></i>
+                    <span>Advertisement &bull; Unit 03</span>
+                </div>
+                <div class="slot-content">
+                    <ins class="adsbygoogle" data-ad-client="ca-pub-8035228866562503" data-ad-slot="4444444444"
+                        data-ad-format="auto" data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+
+            <!-- Wide banner Bottom -->
+            <div class="slot wide">
+                <div class="slot-bar">
+                    <i class="dot sm"></i><i class="dot sm"></i><i class="dot sm"></i>
+                    <span>Advertisement &bull; Footer Banner</span>
+                </div>
+                <div class="slot-content">
+                    <ins class="adsbygoogle" data-ad-client="ca-pub-8035228866562503" data-ad-slot="5555555555"
+                        data-ad-format="auto" data-full-width-responsive="true"></ins>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer Card -->
+        <footer class="footer-card">
+            <div>
+                <strong>AdSpot</strong> &copy; 2026 &bull; All advertising content served via Google AdSense.
+            </div>
+            <nav class="footer-links" aria-label="Footer links">
+                <a href="/">Home</a>
+                <a href="/404.html">404 Page</a>
+                <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google Ads Policy</a>
+            </nav>
+        </footer>
 
     </div>
 
+    <!-- Google AdSense Execution -->
     <script>
-        // Request an ad for every slot on the page
         document.querySelectorAll("ins.adsbygoogle").forEach(function () {
             try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) { }
         });
+    </script>
+
+    <!-- Theme Toggle Support (Synced with 404.html) -->
+    <script>
+        const themeToggle = document.getElementById("themeToggle");
+        const themeLabel = document.getElementById("themeLabel");
+
+        function setTheme(theme) {
+            if (theme === "dark") {
+                document.documentElement.setAttribute("data-theme", "dark");
+                if (themeLabel) themeLabel.textContent = "Light ☀️";
+            } else {
+                document.documentElement.removeAttribute("data-theme");
+                if (themeLabel) themeLabel.textContent = "Dark 🌙";
+            }
+            try { localStorage.setItem("theme", theme); } catch (e) { }
+        }
+
+        const savedTheme = (() => {
+            try { return localStorage.getItem("theme"); } catch (e) { return null; }
+        })();
+        const systemPrefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        setTheme(savedTheme || (systemPrefersDark ? "dark" : "light"));
+
+        if (themeToggle) {
+            themeToggle.addEventListener("click", () => {
+                const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+                setTheme(isDark ? "light" : "dark");
+            });
+        }
     </script>
 </body>
 
