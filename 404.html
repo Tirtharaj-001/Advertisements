@@ -1,65 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>404 - Page Not Found | AdSpot</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f1f3f4;
-            color: #202124;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            text-align: center;
-            padding: 16px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>404 – Page Not Found | AdSpot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     CUSTOMIZE HERE: colors, fonts, border and shadow
+     ============================================================ */
+  :root {
+    --bg: #fff4d6;
+    --ink: #111111;
+    --paper: #ffffff;
+    --accent: #ffd400;
+    --accent-2: #ff5c8a;
+    --accent-3: #3ddc97;
+    --border: 4px solid var(--ink);
+    --shadow: 8px 8px 0 var(--ink);
+    --btn-shadow: 5px 5px 0 var(--ink);
+    --btn-hover-shadow: 3px 3px 0 var(--ink);
+    --font: "Space Grotesk", "Segoe UI", system-ui, Arial, sans-serif;
+    --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+    --input-focus: #fffbe0;
+  }
 
-        .container {
-            background: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            max-width: 480px;
-        }
+  /* Dark mode theme */
+  [data-theme="dark"] {
+    --bg: #141419;
+    --ink: #f0f0f5;
+    --paper: #22222b;
+    --accent: #ffd400;
+    --accent-2: #ff5c8a;
+    --accent-3: #3ddc97;
+    --border: 4px solid #f0f0f5;
+    --shadow: 8px 8px 0 #000000;
+    --btn-shadow: 5px 5px 0 #000000;
+    --btn-hover-shadow: 3px 3px 0 #000000;
+    --input-focus: #2d2b38;
+  }
 
-        h1 {
-            font-size: 3rem;
-            margin: 0 0 16px;
-            color: #1a73e8;
-        }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        p {
-            color: #5f6368;
-            margin: 0 0 24px;
-        }
+  body {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    font-family: var(--font);
+    color: var(--ink);
+    background-color: var(--bg);
+    background-image: radial-gradient(var(--ink) 1.2px, transparent 1.2px);
+    background-size: 22px 22px;
+    transition: background-color .2s ease, color .2s ease;
+  }
 
-        a {
-            display: inline-block;
-            background: #1a73e8;
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 24px;
-            border-radius: 4px;
-            font-weight: 500;
-        }
+  .card {
+    width: 100%;
+    max-width: 680px;
+    background: var(--paper);
+    border: var(--border);
+    box-shadow: var(--shadow);
+    transition: background .2s ease, border-color .2s ease;
+  }
 
-        a:hover {
-            background: #1557b0;
-        }
-    </style>
+  .bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px;
+    background: var(--accent);
+    border-bottom: var(--border);
+    font-family: var(--mono);
+    font-size: .85rem; font-weight: 700;
+    color: #111111;
+  }
+  .dots { display: flex; align-items: center; gap: 8px; }
+  .dot { width: 14px; height: 14px; border: 3px solid #111111; border-radius: 50%; background: #ffffff; }
+  .dot:nth-child(2) { background: var(--accent-2); }
+  .dot:nth-child(3) { background: var(--accent-3); }
+  .bar-title { margin-left: 6px; }
+
+  .theme-toggle {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    font-family: var(--mono);
+    font-size: .75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #111111;
+    background: #ffffff;
+    border: 2px solid #111111;
+    box-shadow: 2px 2px 0 #111111;
+    cursor: pointer;
+    transition: transform .1s, box-shadow .1s;
+  }
+  .theme-toggle:hover { transform: translate(1px, 1px); box-shadow: 1px 1px 0 #111111; }
+  .theme-toggle:active { transform: translate(2px, 2px); box-shadow: 0 0 0 #111111; }
+
+  .body { padding: 36px 32px 32px; }
+
+  .code {
+    font-size: clamp(5.5rem, 26vw, 11rem);
+    font-weight: 900;
+    line-height: .85;
+    letter-spacing: -6px;
+    -webkit-text-stroke: 4px var(--ink);
+    color: var(--accent-2);
+    text-shadow: 6px 6px 0 var(--ink);
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
+
+  h1 {
+    margin-top: 22px;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -.5px;
+  }
+  p { margin-top: 10px; font-size: 1.05rem; line-height: 1.55; font-weight: 500; }
+
+  .path {
+    display: block;
+    margin-top: 18px;
+    padding: 10px 12px;
+    font-family: var(--mono);
+    font-size: .9rem;
+    background: var(--ink);
+    color: var(--accent);
+    overflow-wrap: anywhere;
+  }
+  .path::before { content: "GET "; color: var(--accent-3); }
+
+  .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+  .btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font: inherit; font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--paper);
+    border: var(--border);
+    box-shadow: var(--btn-shadow);
+    cursor: pointer;
+    transition: transform .1s, box-shadow .1s;
+  }
+  .btn:hover { transform: translate(2px, 2px); box-shadow: var(--btn-hover-shadow); }
+  .btn:active { transform: translate(5px, 5px); box-shadow: 0 0 0 var(--ink); }
+  .btn.primary { background: var(--accent); color: #111111; }
+  .btn:focus-visible { outline: 4px solid var(--accent-2); outline-offset: 3px; }
+
+  form { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+  input[type="search"] {
+    flex: 1; min-width: 180px;
+    padding: 12px 14px;
+    font: inherit; font-weight: 600;
+    color: var(--ink);
+    background: var(--paper);
+    border: var(--border);
+  }
+  input[type="search"]:focus { outline: none; background: var(--input-focus); box-shadow: 5px 5px 0 var(--accent-2); }
+
+  .links {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 28px; padding-top: 20px;
+    border-top: 3px dashed var(--ink);
+  }
+  .links a {
+    padding: 4px 12px;
+    font-weight: 700; font-size: .9rem;
+    color: #111111; text-decoration: none;
+    background: var(--accent-3);
+    border: 3px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform .1s, box-shadow .1s;
+  }
+  .links a:nth-child(even) { background: var(--accent-2); }
+  .links a:hover { background: var(--accent); transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
+
+  .redirect { font-family: var(--mono); font-size: .85rem; margin-top: 20px; }
+
+  @media (max-width: 480px) {
+    .body { padding: 26px 20px; }
+    :root { --shadow: 5px 5px 0 var(--ink); --btn-shadow: 4px 4px 0 var(--ink); }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>404</h1>
-        <p>The page you are looking for does not exist or has been moved.</p>
-        <a href="/">Return to AdSpot</a>
-    </div>
-</body>
 
+<main class="card">
+  <div class="bar" aria-label="Window header">
+    <div class="dots" aria-hidden="true">
+      <i class="dot"></i><i class="dot"></i><i class="dot"></i>
+    </div>
+    <span class="bar-title">AdSpot // error.404</span>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+      <span id="themeLabel">Dark 🌙</span>
+    </button>
+  </div>
+
+  <div class="body">
+    <div class="code" aria-hidden="true">404</div>
+    <h1 id="title">Page not found</h1>
+    <p id="message">This page doesn't exist, was moved, or never made it out of the sketchbook.</p>
+    <code class="path" id="path"></code>
+
+    <div class="actions">
+      <a class="btn primary" id="homeBtn" href="/">← Return to AdSpot</a>
+      <button class="btn" type="button" onclick="history.length > 1 ? history.back() : (location.href='/')">Go back</button>
+    </div>
+
+    <!-- Optional: delete this form if you don't want search -->
+    <form id="searchForm" role="search">
+      <input type="search" id="q" placeholder="Search AdSpot…" aria-label="Search AdSpot">
+      <button class="btn" type="submit">Search</button>
+    </form>
+
+    <nav class="links" aria-label="Helpful links" id="links"></nav>
+
+    <p class="redirect" id="redirect" hidden>Redirecting home in <b id="count"></b>s…</p>
+  </div>
+</main>
+
+<script>
+  /* ============================================================
+     CUSTOMIZE HERE: site settings
+     ============================================================ */
+  const CONFIG = {
+    siteName: "AdSpot",
+    homeUrl: "/",
+    // {q} is replaced by the search text. Example for your own site: "/search?q={q}"
+    searchUrl: "https://www.google.com/search?q=site:" + location.hostname + "+{q}",
+    links: [
+      { label: "Home",     href: "/" },
+      { label: "AdSpot",   href: "/" }
+    ],
+    autoRedirectSeconds: 0, // set e.g. 10 to redirect home automatically
+    messages: [
+      ["Page not found",       "This page doesn't exist, was moved, or never made it out of the sketchbook."],
+      ["Wrong turn!",          "This address leads nowhere. Let's get you back on track."],
+      ["Nothing here.",        "We looked everywhere, but this page is gone."]
+    ]
+  };
+
+  const $ = id => document.getElementById(id);
+
+  // Set random message & paths
+  const [t, m] = CONFIG.messages[Math.floor(Math.random() * CONFIG.messages.length)];
+  $("title").textContent = t;
+  document.title = `${t} – 404 | ${CONFIG.siteName}`;
+  $("message").textContent = m;
+  $("path").textContent = location.pathname + location.search;
+  $("homeBtn").href = CONFIG.homeUrl;
+
+  $("links").innerHTML = CONFIG.links.map(l => `<a href="${l.href}">${l.label}</a>`).join("");
+
+  $("searchForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const q = $("q").value.trim();
+    if (q) location.href = CONFIG.searchUrl.replace("{q}", encodeURIComponent(q));
+  });
+
+  if (CONFIG.autoRedirectSeconds > 0) {
+    let n = CONFIG.autoRedirectSeconds;
+    $("redirect").hidden = false;
+    $("count").textContent = n;
+    const timer = setInterval(() => {
+      $("count").textContent = --n;
+      if (n <= 0) { clearInterval(timer); location.href = CONFIG.homeUrl; }
+    }, 1000);
+  }
+
+  // Theme toggle support (Light / Dark mode)
+  const themeToggle = $("themeToggle");
+  const themeLabel = $("themeLabel");
+
+  function setTheme(theme) {
+    if (theme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+      if (themeLabel) themeLabel.textContent = "Light ☀️";
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+      if (themeLabel) themeLabel.textContent = "Dark 🌙";
+    }
+    try { localStorage.setItem("theme", theme); } catch (e) {}
+  }
+
+  const savedTheme = (() => {
+    try { return localStorage.getItem("theme"); } catch (e) { return null; }
+  })();
+  const systemPrefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  setTheme(savedTheme || (systemPrefersDark ? "dark" : "light"));
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      setTheme(isDark ? "light" : "dark");
+    });
+  }
+</script>
+</body>
 </html>
